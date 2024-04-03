@@ -2,6 +2,7 @@ import { DrawCommand } from "./commands/drawCommand";
 import { DrawingsManager } from "./drawingsManager";
 import { Drawable } from "./shapes/drawable";
 import { UndoManager } from "./undoManager";
+import { RedoManager } from "./redoManager";
 
 type CanvasProps = {
   canvasId: string 
@@ -12,7 +13,7 @@ export class Canvas {
   #context: CanvasRenderingContext2D
   #drawingsManager: DrawingsManager
   #undoManager: UndoManager
-
+  #redoManager: RedoManager
   
 
   constructor(props: CanvasProps) {
@@ -22,6 +23,7 @@ export class Canvas {
     this.#canvasElm.height = 500
     this.#drawingsManager = new DrawingsManager()
     this.#undoManager = new UndoManager()
+    this.#redoManager = new RedoManager()
   }
 
   /**
@@ -52,13 +54,26 @@ export class Canvas {
 
   execute = (cmd: DrawCommand) => {
     cmd.execute(this)
+    this.#redoManager.clear()
     this.#undoManager.add(cmd)
     this.#draw()
   }
 
   undo = () => {
     const cmd = this.#undoManager.pop()
-    cmd?.undo(this)
+    if (cmd) {
+      cmd.undo(this)
+      this.#redoManager.add(cmd)
+    }
+    this.#draw()
+  }
+
+  redo = () => {
+    const cmd = this.#redoManager.pop()
+    if (cmd) {
+      console.log(cmd)
+      cmd.execute(this)
+    }
     this.#draw()
   }
 

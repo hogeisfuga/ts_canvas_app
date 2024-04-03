@@ -18,12 +18,12 @@ export class DrawableUpdateCommand implements DrawCommand {
       if(old != null) this.#olds.push(old)
     })
 
-    this.#drawings.forEach(drawing => canvas.findDrawingById(drawing.id))
     canvas.replace([...this.#drawings])
   }
 
   undo = (canvas: Canvas) => {
-    canvas.replace([...this.#olds])
+    console.log(this.#olds[0])
+    canvas.replace(this.#olds)
   }
 
 }

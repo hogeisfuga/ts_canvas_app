@@ -9,11 +9,10 @@ export class UndoManager {
   }
 
   add = (cmd: DrawCommand) => {
-    console.log("added")
     this.#undoStack.push(cmd)
   }
 
   pop = () => {
-    return this.#undoStack.shift()
+    return this.#undoStack.pop()
   }
 }

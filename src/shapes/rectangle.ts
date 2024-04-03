@@ -3,6 +3,7 @@ import { Drawable } from "./drawable"
 import { v4 as uuidv4 } from 'uuid';
 
 export type RectangleProps = {
+  id?: string,
   x: number,
   y: number,
   color?: string,
@@ -23,7 +24,7 @@ export class Reactangle implements Drawable {
   }
 
   set y(y: number) {
-    this.y = y
+    this.#y = y
   }
 
   set color(color: string) {
@@ -42,15 +43,37 @@ export class Reactangle implements Drawable {
     return this.#id
   }
 
+  get x() {
+    return this.#x
+  }
+
+  get y() {
+    return this.#y
+  }
+
+  get color() {
+    return this.#color
+  }
+
+  get width() {
+    return this.#width
+  }
+
+  get height() {
+    return this.#height
+  }
+
+
   constructor(props: RectangleProps) {
-    const {x, y, color, width, height} = props
+    const {id, x, y, color, width, height} = props
     this.#x = x
     this.#y = y
     this.#color = color || "#6C0"
     this.#width = width
     this.#height = height
-    this.#id = uuidv4()
+    this.#id = id || uuidv4()
   }
+
   draw = (ctx: CanvasRenderingContext2D) => {
     ctx.fillStyle = this.#color
     ctx.fillRect(this.#x, this.#y, this.#width, this.#height)
