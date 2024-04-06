@@ -4,18 +4,18 @@ import { DrawCommand } from "./drawCommand"
 
 export class DrawableCreateCommand implements DrawCommand {
   #drawings: Drawable[]
+  #canvas: Canvas
 
-  constructor(drawings: Drawable[]) {
+  constructor(canvas: Canvas,drawings: Drawable[]) {
+    this.#canvas = canvas
     this.#drawings = drawings
   }
 
-  execute = (canvas: Canvas) => {
-    canvas.add([...this.#drawings])
+  execute = () => {
+    this.#canvas.add([...this.#drawings])
   }
 
-  undo = (canvas: Canvas) => {
-    console.log("here!")
-    console.log(this.#drawings)
-    canvas.remove(this.#drawings.map(drawing => drawing.id))
+  undo = () => {
+    this.#canvas.remove(this.#drawings.map(drawing => drawing.id))
   }
 }
