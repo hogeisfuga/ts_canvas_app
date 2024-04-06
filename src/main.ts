@@ -11,17 +11,13 @@ canvas.execute(new DrawableCreateCommand([rectangle]))
 const rectangle2 = new Reactangle({x: 150, y:200, width:50, height:50, color: "#f50"})
 canvas.execute(new DrawableCreateCommand([rectangle2]))
 
-const copiedProps = {x: rectangle2.x, y: rectangle2.y, width: rectangle2.width, height: rectangle2.height, id: rectangle2.id, color: rectangle2.color}
-const updatedRectangle = new Reactangle(copiedProps)
+const updatedProps = {x: 33, width: 111, color: "#ff4"}
+const updatedRectangle = Reactangle.copy(rectangle2)
+updatedRectangle.update(updatedProps)
 
-updatedRectangle.color = '#ff4'
-updatedRectangle.x = 33
-updatedRectangle.width = 111
 canvas.execute(new DrawableUpdateCommand([updatedRectangle]))
 
-canvas.undo()
-canvas.undo()
-canvas.undo()
-canvas.redo()
-canvas.redo()
-canvas.redo()
+
+
+
+

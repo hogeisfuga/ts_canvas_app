@@ -11,6 +11,8 @@ export type RectangleProps = {
   height: number
 }
 
+export type UpdateRectangleProps = Partial<Omit<RectangleProps, 'id'>>
+
 export class Reactangle implements Drawable {
   #x: number
   #y: number
@@ -18,51 +20,6 @@ export class Reactangle implements Drawable {
   #width: number
   #height: number
   #id: string
-
-  set x(x: number) {
-    this.#x = x
-  }
-
-  set y(y: number) {
-    this.#y = y
-  }
-
-  set color(color: string) {
-    this.#color = color
-  }
-
-  set width(width: number) {
-    this.#width = width
-  }
-
-  set height(height: number) {
-    this.#height = height
-  }
-
-  get id() {
-    return this.#id
-  }
-
-  get x() {
-    return this.#x
-  }
-
-  get y() {
-    return this.#y
-  }
-
-  get color() {
-    return this.#color
-  }
-
-  get width() {
-    return this.#width
-  }
-
-  get height() {
-    return this.#height
-  }
-
 
   constructor(props: RectangleProps) {
     const {id, x, y, color, width, height} = props
@@ -74,8 +31,37 @@ export class Reactangle implements Drawable {
     this.#id = id || uuidv4()
   }
 
+  // getter
+  get id() { return this.#id }
+  get x() { return this.#x }
+  get y() { return this.#y }
+  get color() { return this.#color }
+  get width() { return this.#width }
+  get height() { return this.#height }
+
+  update = (props: UpdateRectangleProps) => {
+    Object.entries(props).forEach(([key, value]) => {
+      if (key === "x") this.#x = value as number
+      if (key === "y") this.#y = value as number
+      if (key === "color") this.#color = value as string
+      if (key === "width") this.#width = value as number
+      if (key === "height") this.#height = value as number
+    })
+  }
+
   draw = (ctx: CanvasRenderingContext2D) => {
     ctx.fillStyle = this.#color
     ctx.fillRect(this.#x, this.#y, this.#width, this.#height)
+  }
+
+  static copy = (original: Reactangle) => {
+    return new Reactangle({
+      x: original.x,
+      y: original.y,
+      color: original.color,
+      width: original.width,
+      height: original.height,
+      id: original.id
+    })
   }
 }
