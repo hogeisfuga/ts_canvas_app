@@ -1,4 +1,4 @@
-import { CONSTANTS } from "./config/constants";
+import { CONSTANTS } from "./appConfig/constants";
 import { DrawingsManager } from "./drawingsManager";
 import { Drawable } from "./shapes/drawable";
 type CanvasProps = {

@@ -1,0 +1,31 @@
+body {
+  background-color: black;
+}
+
+#app {
+  background-color: rgb(186, 209, 228);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+#canvas {
+  margin: auto;
+  background-color: white;
+}
+
+.toolbar {
+  width: 100px;
+  margin: 1rem auto;
+  display: flex;
+
+  & .edit-tool-item {
+    opacity: 0;
+  }
+}
+
+.rotate45 {
+  transform: rotate(45deg);
+}  

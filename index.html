@@ -2,14 +2,31 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <script src="https://kit.fontawesome.com/25e62aab7a.js" crossorigin="anonymous"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./src/style.css" >
-    <title>Vite + TS</title>
+    <link rel="stylesheet" href="style.css" >
+    <title>drawing app</title>
   </head>
   <body>
     <div id="app">
-      <canvas id="myCanvas"></canvas>
+      <div class="container">
+        <div class="toolbar">
+          <label class="tool-icon">
+            <input type="radio" class="edit-tool-item" name="edit-tool">
+            <div>
+              <i class="far fa-square"></i>
+            </div>
+          </label>
+          <label class="tool-icon">
+            <input type="radio" class="edit-tool-item" name="edit-tool">
+            <div>
+              <i class="far fa-square rotate45"></i>
+            </div>
+          </label>
+        </div>
+      </div>
+        <canvas id="canvas"></canvas>
+      </div>
     </div>
     <script type="module" src="/src/main.ts"></script>
   </body>

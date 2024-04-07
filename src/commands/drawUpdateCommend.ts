@@ -24,7 +24,6 @@ export class DrawableUpdateCommand implements DrawCommand {
   }
 
   undo = () => {
-    console.log(this.#olds[0])
     this.#canvas.replace(this.#olds)
   }
 
